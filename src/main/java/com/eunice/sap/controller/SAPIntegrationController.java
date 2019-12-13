@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class SAPIntegrationController {
 
     @RequestMapping(value = "/process", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public String processData(@RequestBody String data)
+    public String processData(@RequestBody List<Object> data)
     {
         return "Hello, we yet to process data...!!!";
     }
