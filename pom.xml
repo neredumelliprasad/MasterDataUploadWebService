@@ -52,6 +52,11 @@
 			<artifactId>s4hana-all</artifactId>
 			<version>3.8.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sap.cloud.s4hana.datamodel</groupId>
+			<artifactId>odata-api</artifactId>
+			<version>2.21.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
