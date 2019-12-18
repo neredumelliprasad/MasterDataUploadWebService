@@ -15,23 +15,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UploadConfiguration
 {
-    @Value("${sap.base.url}")
-    private String baseUrl;
-    @Value("${sap.api.user}")
-    private String user;
-    @Value("${sap.api.user.password}")
-    private String password;
+    @Value("${sap.destinationName}")
+    private String destinationName;
    @Bean
-   public ProductMasterServiceBatch getProductMasterService(){
-       ProductMasterService productMasterService = new DefaultProductMasterService();
+   public ProductMasterServiceBatch getProductMasterServiceBatch(){
+       ProductMasterService productMasterService = getProductMasterService();
        ProductMasterServiceBatch batchServiceBatchChangeSet = new DefaultProductMasterServiceBatch(productMasterService);
        return batchServiceBatchChangeSet;
    }
 
     @Bean
-    public HttpDestinationProperties destinationProperties() {
-       ErpHttpDestination destination = DestinationAccessor.getDestination("ErpQueryEndpoint").asHttp().decorate(DefaultErpHttpDestination::new);
+    public ProductMasterService getProductMasterService(){
+        ProductMasterService productMasterService = new DefaultProductMasterService();
+        return productMasterService;
+    }
 
+    @Bean
+    public HttpDestinationProperties destinationProperties() {
+       ErpHttpDestination destination = DestinationAccessor.getDestination(destinationName).asHttp().decorate(DefaultErpHttpDestination::new);
         return new DefaultErpHttpDestination(destination);
     }
 }
