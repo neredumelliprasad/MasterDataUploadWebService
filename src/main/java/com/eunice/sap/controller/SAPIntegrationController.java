@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
@@ -33,9 +34,16 @@ public class SAPIntegrationController {
 
 
     @RequestMapping(value = "/product", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public List<Product> processData() throws Exception
+    public List<Product> getTop10Products() throws Exception
     {
         return productMasterDataService.getProductTop10();
+    }
+
+    @RequestMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public List<Product> getProductsByKeys(@RequestParam List<String> productKeys) throws Exception
+    {
+        List<Product> products = productMasterDataService.getProductsByKey(productKeys);
+        return products;
     }
 
     @RequestMapping(value = "/product", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
