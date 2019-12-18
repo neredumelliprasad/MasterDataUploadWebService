@@ -8,6 +8,8 @@ import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.productmaster.batch.D
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.productmaster.batch.ProductMasterServiceBatch;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultProductMasterService;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.ProductMasterService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,8 @@ public class UploadConfiguration
 {
     @Value("${sap.destinationName}")
     private String destinationName;
+
+    private static final Logger LOG = LoggerFactory.getLogger(UploadConfiguration.class);
    @Bean
    public ProductMasterServiceBatch getProductMasterServiceBatch(){
        ProductMasterService productMasterService = getProductMasterService();
@@ -32,7 +36,15 @@ public class UploadConfiguration
 
     @Bean
     public HttpDestinationProperties destinationProperties() {
-       ErpHttpDestination destination = DestinationAccessor.getDestination(destinationName).asHttp().decorate(DefaultErpHttpDestination::new);
+        ErpHttpDestination destination;
+       try{
+           destination = DestinationAccessor.getDestination(destinationName).asHttp().decorate(DefaultErpHttpDestination::new);
+       }
+       catch (Exception e){
+           LOG.warn("Failed to define SAP destination:"+destinationName+" No SAP connectors found!");
+           destination = null;
+       }
         return new DefaultErpHttpDestination(destination);
+
     }
 }

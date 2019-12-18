@@ -5,7 +5,6 @@ package com.eunice.sap.mappers;
 
 import com.eunice.sap.model.DataConstructionContext;
 import com.eunice.sap.model.RawProductData;
-import com.sap.cloud.sdk.datamodel.odata.helper.VdmEntity;
 
 /**
  * History:
@@ -16,7 +15,7 @@ import com.sap.cloud.sdk.datamodel.odata.helper.VdmEntity;
  * @authors roychoud : Arunava Roy Choudhury
  * © 2019 HERE
  */
-public interface RawDataMapper<T extends VdmEntity>
+public interface RawDataMapper<T extends Object>
 {
 
     T createEntity(RawProductData rawProductData,DataConstructionContext constructionContext);

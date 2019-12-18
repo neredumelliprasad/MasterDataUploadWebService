@@ -25,11 +25,4 @@ public class DataConstructionContext
     {
         return productMap;
     }
-
-
-    public DataConstructionContext setProductMap(Map<String, Product> productMap)
-    {
-        this.productMap = productMap;
-        return this;
-    }
 }

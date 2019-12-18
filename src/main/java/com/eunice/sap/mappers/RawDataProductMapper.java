@@ -57,6 +57,7 @@ public class RawDataProductMapper implements RawDataMapper<Product>
         product.setProduct(rawProductData.getMaterial());
         product.setProductType(rawProductData.getMaterialType());
         product.addPlant(createProductPlant(rawProductData,constructionContext));
+        constructionContext.getProductMap().put(product.getProduct(),product);
         return product;
     }
 }
