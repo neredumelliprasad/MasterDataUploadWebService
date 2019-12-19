@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.eunice</groupId>
-	<artifactId>sap</artifactId>
+	<artifactId>master-data-uploader</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>sap-integration</name>
 	<packaging>war</packaging>
