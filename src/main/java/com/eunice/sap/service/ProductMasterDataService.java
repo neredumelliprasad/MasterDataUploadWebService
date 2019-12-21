@@ -9,6 +9,7 @@ import com.sap.cloud.sdk.datamodel.odata.helper.ExpressionFluentHelper;
 import com.sap.cloud.sdk.datamodel.odata.helper.batch.BatchResponse;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.productmaster.Product;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.productmaster.ProductFluentHelper;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.productmaster.batch.ProductMasterServiceBatch;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.productmaster.batch.ProductMasterServiceBatchChangeSet;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.ProductMasterService;
@@ -45,8 +46,8 @@ public class ProductMasterDataService extends RawDataProductMapper
     @Transactional
     public List<Product> getProductTop10() throws ODataException
     {
-        return productMasterService.getAllProduct().
-            top(10).execute(connection);
+        ProductFluentHelper productFluentHelper =  productMasterService.getAllProduct().top(10);
+        return productFluentHelper.execute(connection);
     }
 
     public List<Product> getProductsByKey(List<String> productKeys) throws ODataException
